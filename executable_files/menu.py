@@ -5,7 +5,7 @@ import logging
 from executable_files.card_info import CardInfo
 from executable_files.luhn_algorithm import luhn_algorithm
 from executable_files.card_number import create_card_number
-from executable_files.cores_time import 
+from executable_files.cores_time import Stat
 
 logging.getLogger().setLevel(logging.INFO)
 
@@ -30,7 +30,16 @@ def menu() -> None:
             card_info.hash_card, card_info.last_num, card_info.bins_card, 8)
         print(f"card number is {number}")
         card_info.card_number_serealization(number, args.path)
-    
+    elif args.corestime:
+        card_info = CardInfo(args.path)
+        stat = Stat(args.path)
+        for i in range(1, 9):
+            start = time.perf_counter()
+            create_card_number(card_info.hash_card,
+                               card_info.last_num, card_info.bins_card, i)
+            end = time.perf_counter()
+            stat.time_serialization(i, end-start)
+        stat.save_fig()
     elif args.luhnalg:
         card_info = CardInfo(args.path)
         number = card_info.card_number_deserealization(args.path)
