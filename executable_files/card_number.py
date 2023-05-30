@@ -11,7 +11,7 @@ def compare_hash_with_number(number:str, hash:str, bin:str, last_numbers:str)->t
     """
     Func that converts a number to a hash and compares it with a given hash 
     """
-    curNumber = "".join([bin,number,last_numbers])
+    curNumber = f"{bin}{number}{last_numbers}"
     if hashlib.blake2s(curNumber.encode()).hexdigest() == hash:
         return curNumber
     return None
