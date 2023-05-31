@@ -15,15 +15,12 @@ def menu() -> None:
     """
     logger = logging.getLogger(__name__)
 
-    # Configure the logging level and format
     logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
-    # Create a file handler to write error messages to a file
     file_handler = logging.FileHandler("log.txt")
     file_handler.setLevel(logging.ERROR)
     logger.addHandler(file_handler)
 
-    # Create an argument parser
     parser = argparse.ArgumentParser()
     group = parser.add_mutually_exclusive_group(required=True)
     parser.add_argument(
@@ -36,10 +33,8 @@ def menu() -> None:
                     help="Runs the Luhn algorithm")
     args = parser.parse_args()
 
-    # Log the arguments
     logger.debug(f"Arguments: {args}")
 
-    # Define some functions for the script logic
     def create_card_number(hash_card, last_num, bins_card, cores):
         """
         This function takes four arguments: hash_card, last_num, bins_card and cores
@@ -83,7 +78,6 @@ def menu() -> None:
         """
         logger.debug(f"Saving figure")
 
-    # Execute the script logic based on the arguments
     if args.cardnumber:
         try:
             card_info = CardInfo(args.path)
