@@ -83,7 +83,7 @@ def menu() -> None:
             card_info = CardInfo(args.path)
             number = create_card_number(
                 card_info.hash_card, card_info.last_num, card_info.bins_card, 8)
-            print(f"card number is {number}")
+            logger.info(f"card number is {number}")
             card_number_serealization(number, args.path)
             logger.info(f"Card number created and serialized successfully")
         except Exception as e:
@@ -106,7 +106,7 @@ def menu() -> None:
         try:
             card_info = CardInfo(args.path)
             number = card_number_deserealization(args.path)
-            print(luhn_algorithm(number))
+            logger.info(luhn_algorithm(number))
             logger.info(f"Luhn algorithm applied successfully")
         except Exception as e:
             logger.error(f"An error occurred while applying Luhn algorithm: {e}")
